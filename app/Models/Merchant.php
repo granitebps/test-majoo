@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Merchant extends Model
 {
@@ -15,4 +17,14 @@ class Merchant extends Model
         'created_by',
         'updated_by'
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function outlets(): HasMany
+    {
+        return $this->hasMany(Outlet::class, 'merchant_id', 'id');
+    }
 }

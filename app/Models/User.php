@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
@@ -70,5 +71,10 @@ class User extends Authenticatable implements JWTSubject
             $user->updated_by = $user->id;
             $user->save();
         });
+    }
+
+    public function merchants(): HasMany
+    {
+        return $this->hasMany(Merchant::class, 'user_id', 'id');
     }
 }
