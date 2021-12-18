@@ -27,4 +27,9 @@ class Merchant extends Model
     {
         return $this->hasMany(Outlet::class, 'merchant_id', 'id');
     }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'merchant_id', 'id');
+    }
 }
